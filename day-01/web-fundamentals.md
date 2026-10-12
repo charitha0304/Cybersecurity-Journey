@@ -203,3 +203,8 @@ What I took from this beyond the definitions:
 - Security controls must be enforced server-side to exist at all
 
 ---
+
+## Next Step
+
+Move from reading requests to manipulating them: set up an intercepting proxy and observe real
+traffic from a browser, rather than reading about request structure in the abstract.

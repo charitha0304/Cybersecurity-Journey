@@ -3,146 +3,131 @@
 A working record of my transition from software development into application security.
 
 I am a software developer with around a year of professional experience building web
-applications with Angular and .NET. I am now moving into cybersecurity, focusing on
-application security. This repository documents what I learn, what I test, what I observe,
-and how I reason about it.
+applications with Angular and .NET/C#. I am now moving into cybersecurity, focused on
+application security. This repository documents the vulnerability classes I study, the labs
+I complete, what I observe, and how I reason about root cause and remediation.
 
-I want to be clear about where I am: I am at the beginning of this transition. I have not
-worked professionally as a penetration tester or a security engineer. What this repository
-demonstrates is methodology and progression, not seniority. All testing documented here is
-performed against authorised lab environments — see [SECURITY.md](SECURITY.md).
-
----
-
-## Target Direction
-
-**Primary:** Junior Application Security / AppSec
-**Secondary:** API Security, Vulnerability Management, Cloud Security
+Where I am being clear about: I am at the start of this transition. I have not worked
+professionally as a penetration tester or security engineer. What this repository
+demonstrates is methodology and progression — learn, practise, test, observe, explain,
+remediate, document — not seniority. All testing is performed against authorised lab
+environments; see [SECURITY.md](SECURITY.md).
 
 ---
 
-## Background
+## Why my background is relevant to AppSec
 
-I currently work as a developer. My day-to-day stack:
+Application security is largely a code and design discipline, and my development experience
+maps onto it directly:
+
+- I can read the code that contains the bug — a C# controller or an Angular service.
+- I know where authorisation checks are supposed to live (middleware order, route handlers).
+- I have written the database queries, so injection is concrete rather than theoretical.
+- I have designed REST APIs, so object-level authorisation, mass assignment and excessive
+  data exposure are failures of decisions I have actually made.
 
 | Area | Technologies |
 |---|---|
 | Frontend | Angular, TypeScript, JavaScript, HTML, CSS |
 | Backend | .NET, C#, REST APIs |
 | Data | SQL |
-| Tooling | Git, GitHub |
-
-### Why this background matters for AppSec
-
-Application security is largely a code and design discipline, and my development experience
-maps onto it directly:
-
-- **I can read the code that contains the bug.** Most vulnerabilities in web applications are
-  reachable only by understanding what the application was intended to do. Being able to open
-  a C# controller or an Angular service and follow the logic is the core skill, not an extra.
-- **I know where authorisation checks are supposed to live.** Having built API endpoints, I
-  understand middleware ordering, route handlers, and where a privilege check gets missed.
-- **I have written the queries.** Parameterised queries, ORM behaviour, and raw SQL are
-  familiar to me, which makes injection classes concrete rather than theoretical.
-- **I have designed APIs.** Object-level authorisation, over-posting, and excessive data
-  exposure are failures of API design, and I have made the design decisions they come from.
-- **I understand the SDLC.** Security findings only matter if a development team can act on
-  them. I have been on the receiving end of that conversation.
+| Tooling | Git, GitHub, Burp Suite |
 
 ---
 
-## Skills I Am Currently Developing
+## Lab write-ups
 
-- HTTP/HTTPS protocol fundamentals — requests, responses, methods, headers, cookies, status codes
-- Authentication vs authorisation, and where the distinction breaks in practice
-- Web proxy interception and request manipulation with Burp Suite
-- Broken access control identification and reasoning
-- Structured vulnerability documentation: methodology, root cause, impact, remediation
-- OWASP Top 10 concepts
+Thirteen labs completed and documented, plus one in progress. Each write-up covers the
+objective, observation and methodology, root cause, security impact, remediation, lessons,
+and redacted evidence. Several include a note on how the issue maps to the .NET/Angular stack.
 
----
-
-## Hands-On Platforms
-
-| Platform | Use |
-|---|---|
-| PortSwigger Web Security Academy | Primary lab environment for web vulnerability classes |
-| TryHackMe | Foundational web and networking concepts |
-| Burp Suite Community Edition | Intercepting proxy for hands-on request analysis |
-
----
-
-## Write-Ups
-
-Each write-up follows the same structure: what the application was doing, what I observed,
-how I tested it, why the flaw exists, the impact, the root cause, and how I would fix it.
-
-| Day | Topic | Write-up |
+### Broken access control
+| Lab | Status | Write-up |
 |---|---|---|
-| 01 | Web fundamentals | [web-fundamentals.md](day-01/web-fundamentals.md) |
-| 02 | Intercepting HTTP traffic | [intercepting-http-traffic.md](day-02/burp-suite/intercepting-http-traffic.md) |
-| 02 | Modifying HTTP requests | [modifying-http-requests.md](day-02/burp-suite/modifying-http-requests.md) |
-| 02 | Unprotected administrative functionality | [unprotected-admin-functionality.md](day-02/burp-suite/unprotected-admin-functionality.md) |
+| Unprotected admin functionality | Solved | [read](labs/access-control/01-unprotected-admin-functionality/) |
+| User ID controlled by request parameter (IDOR) | Solved | [read](labs/access-control/02-user-id-controlled-by-request-parameter/) |
+| URL-based access control can be circumvented | In progress | [read](labs/access-control/03-url-based-access-control-circumvented/) |
 
-Longer write-ups are organised by vulnerability class under [`writeups/`](writeups/):
-web security, API security, authentication, authorisation, injection, and cloud security.
-
----
-
-## Projects
-
-Planned hands-on builds. These are not yet complete and are listed here so the intended
-direction is visible.
-
-| Project | Description | Status |
+### Authentication
+| Lab | Status | Write-up |
 |---|---|---|
-| [`secure-api/`](projects/secure-api/) | A .NET REST API built with authorisation, input validation and security headers applied deliberately, documented decision by decision | Not started |
-| [`web-security-lab/`](projects/web-security-lab/) | A deliberately vulnerable Angular + .NET application, where I introduce vulnerabilities, exploit them, then remediate them and document each cycle | Not started |
-| [`azure-security-lab/`](projects/azure-security-lab/) | Cloud security configuration exercises | Not started |
+| Username enumeration via different responses | Solved | [read](labs/authentication/username-enumeration-via-different-responses/) |
+| Brute-forcing a stay-logged-in cookie | Solved | [read](labs/authentication/brute-forcing-a-stay-logged-in-cookie/) |
+| JWT authentication bypass via unverified signature | Solved | [read](labs/authentication/jwt-auth-bypass-via-unverified-signature/) |
+
+### SQL injection
+| Lab | Status | Write-up |
+|---|---|---|
+| Retrieval of hidden data | Solved | [read](labs/sql-injection/retrieval-of-hidden-data/) |
+| Login bypass | Solved | [read](labs/sql-injection/login-bypass/) |
+
+### Cross-site scripting (XSS)
+| Lab | Status | Write-up |
+|---|---|---|
+| Reflected XSS into HTML context | Solved | [read](labs/xss/reflected-into-html-context/) |
+| Stored XSS into HTML context | Solved | [read](labs/xss/stored-into-html-context/) |
+| DOM XSS in document.write sink | Solved | [read](labs/xss/dom-xss-document-write-sink/) |
+
+### Cross-site request forgery (CSRF)
+| Lab | Status | Write-up |
+|---|---|---|
+| CSRF with no defenses | Solved | [read](labs/csrf/no-defenses/) |
+
+### API testing
+| Lab | Status | Write-up |
+|---|---|---|
+| Exploiting an API endpoint using documentation | Solved | [read](labs/api-testing/exploiting-api-endpoint-using-documentation/) |
+| Exploiting a mass assignment vulnerability | Solved | [read](labs/api-testing/mass-assignment/) |
 
 ---
 
-## Learning Roadmap
+## Learning journal
 
-**Phase 1 — Web and protocol fundamentals**
-HTTP/HTTPS, DNS, TLS, the request lifecycle, same-origin policy, proxy interception.
-
-**Phase 2 — Core web vulnerability classes**
-Access control, authentication flaws, SSRF, injection, XSS, business logic — worked through
-the PortSwigger Web Security Academy labs with a write-up for each class.
-
-**Phase 3 — Language-specific application security**
-.NET and Angular specific issues: insecure deserialisation, model binding and over-posting,
-middleware ordering, sanitiser bypasses in Angular templates.
-
-**Phase 4 — API security**
-Object-level authorisation, token handling, OAuth and JWT failure modes.
-
-**Phase 5 — Secure code review and automation**
-Static analysis, dependency scanning, and integrating security checks into CI/CD.
-
-**Phase 6 — Threat modelling and secure design**
-STRIDE, OWASP ASVS, and documenting a threat model for my own applications.
+| Day | Topic | Notes |
+|---|---|---|
+| 01 | Web fundamentals (HTTP/HTTPS, methods, headers, cookies, status codes, authN vs authZ) | [read](day-01/web-fundamentals.md) |
+| 02 | Intercepting HTTP traffic with Burp Suite | [read](day-02/burp-suite/intercepting-http-traffic.md) |
+| 02 | Modifying HTTP requests with Burp Suite | [read](day-02/burp-suite/modifying-http-requests.md) |
 
 ---
 
-## Professional Goals
+## Platforms and resources
 
-- Move into a junior application security or security engineering role
-- Build a demonstrable record of finding, explaining and remediating vulnerabilities rather
-  than only completing labs
-- Develop depth in .NET and API security specifically, rather than breadth across every
-  security domain at once
-- Contribute security fixes to open-source projects
+- **PortSwigger Web Security Academy** — primary lab environment for web vulnerability classes
+- **Burp Suite (Community)** — intercepting proxy used across the labs
+- **TryHackMe** — foundational web and networking concepts
+- **OWASP** — Top 10, API Security Top 10, ASVS, WSTG, Cheat Sheet Series
+
+See [resources/learning-resources.md](resources/learning-resources.md).
+
+---
+
+## Evidence and redaction
+
+Screenshots are stored in a `screenshots/` folder inside each lab. Secrets captured during
+testing — an API key, session and persistent-login cookies — have been redacted in the
+committed images. The URL-based access control lab is recorded honestly as **in progress**
+until I reproduce and capture a confirmed solved result. See [SECURITY.md](SECURITY.md).
+
+---
+
+## Roadmap
+
+1. Core web vulnerability classes via the Web Security Academy (in progress).
+2. .NET and Angular specific issues — insecure deserialisation, over-posting, middleware
+   ordering, sanitiser bypasses.
+3. API security depth — object-level authorisation, token and JWT handling.
+4. Secure code review and automation — SAST, dependency scanning, CI integration.
+5. Threat modelling and secure design — STRIDE, OWASP ASVS.
 
 ---
 
 ## Contact
 
-[Add LinkedIn URL]
-[Add email if you want to make it public]
+- GitHub: https://github.com/charitha0304
+- LinkedIn: [Add LinkedIn URL]
 
 ---
 
-*This repository is a learning record. Nothing here should be taken as professional security
-advice, and every finding documented is from an authorised lab environment.*
+*This repository is a learning record. Every finding documented here is from an authorised
+lab environment, and no official lab solutions are reproduced.*

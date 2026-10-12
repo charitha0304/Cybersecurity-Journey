@@ -37,3 +37,16 @@ If you believe anything in this repository is inaccurate, inappropriate, or disc
 something it should not, please open an issue or contact me directly.
 
 `[Add contact email]`
+
+## Redaction of Captured Secrets
+
+Some screenshots captured during lab testing contained values that should not be published.
+These have been redacted in the committed images:
+
+- An API key displayed on another user's account page (IDOR lab) — covered with a solid bar.
+- A persistent "stay logged in" cookie value (cookie brute-force lab) — covered.
+- A session cookie in a request (URL-based access control lab) — covered.
+
+The redacted values belonged to ephemeral PortSwigger lab instances and are not reusable, but
+they are removed as a matter of good practice. The URL-based access control lab is kept in an
+"In Progress" state and is not presented as solved.
