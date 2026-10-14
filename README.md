@@ -81,13 +81,31 @@ and redacted evidence. Several include a note on how the issue maps to the .NET/
 
 ---
 
-## Learning journal
+## Vulnerability assessment reports (OWASP ZAP)
 
-| Day | Topic | Notes |
-|---|---|---|
-| 01 | Web fundamentals (HTTP/HTTPS, methods, headers, cookies, status codes, authN vs authZ) | [read](day-01/web-fundamentals.md) |
-| 02 | Intercepting HTTP traffic with Burp Suite | [read](day-02/burp-suite/intercepting-http-traffic.md) |
-| 02 | Modifying HTTP requests with Burp Suite | [read](day-02/burp-suite/modifying-http-requests.md) |
+A small vulnerability assessment of a local, self-hosted OWASP Juice Shop instance using OWASP
+ZAP 2.17.0 — passive and active scanning, with manual validation of the key finding. These are
+tool-driven assessment reports, distinct from the manual labs above.
+
+| Finding | Scan type | Severity | Report |
+|---|---|---|---|
+| SQL Injection — product search `q` parameter | Active + manual validation | High | [read](vulnerability-assessment-reports/owasp-zap-juice-shop/active-scan-sql-injection/) |
+| Content Security Policy (CSP) header not set | Passive | Misconfiguration | [read](vulnerability-assessment-reports/owasp-zap-juice-shop/passive-scan-csp-header/) |
+
+Overview: [vulnerability-assessment-reports/owasp-zap-juice-shop/](vulnerability-assessment-reports/owasp-zap-juice-shop/)
+
+---
+
+## Fundamentals
+
+Foundational notes written while building up the basics — how the web works underneath, and
+getting hands-on with an intercepting proxy.
+
+| Topic | Notes |
+|---|---|
+| Web fundamentals — HTTP/HTTPS, methods, headers, cookies, status codes, authN vs authZ | [read](fundamentals/web-fundamentals.md) |
+| Intercepting HTTP traffic with Burp Suite | [read](fundamentals/burp-suite/intercepting-http-traffic.md) |
+| Modifying HTTP requests with Burp Suite | [read](fundamentals/burp-suite/modifying-http-requests.md) |
 
 ---
 
@@ -95,6 +113,8 @@ and redacted evidence. Several include a note on how the issue maps to the .NET/
 
 - **PortSwigger Web Security Academy** — primary lab environment for web vulnerability classes
 - **Burp Suite (Community)** — intercepting proxy used across the labs
+- **OWASP ZAP** — passive and active scanning of a local OWASP Juice Shop instance
+- **OWASP Juice Shop** — deliberately vulnerable app, self-hosted locally for assessment practice
 - **TryHackMe** — foundational web and networking concepts
 - **OWASP** — Top 10, API Security Top 10, ASVS, WSTG, Cheat Sheet Series
 

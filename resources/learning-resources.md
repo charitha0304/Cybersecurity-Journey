@@ -13,7 +13,7 @@ applications.
 
 Used for:
 - Structured coverage of web vulnerability classes
-- Hands-on labs, including the access control lab documented in `day-02/`
+- Hands-on labs documented under `labs/`, with tool-practice notes under `fundamentals/`
 - Reference material on individual vulnerability classes
 
 ---
