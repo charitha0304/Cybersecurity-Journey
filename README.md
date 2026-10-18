@@ -96,6 +96,17 @@ Overview: [vulnerability-assessment-reports/owasp-zap-juice-shop/](vulnerability
 
 ---
 
+## Projects
+
+Self-built projects that go beyond individual labs — building an application, testing its security, and remediating vulnerabilities end to end.
+
+| Project | Stack | Scope | Write-up |
+|---------|-------|-------|----------|
+| Vulnerable Employee Management API | .NET 8 Web API, EF Core, SQLite, JWT | SQL injection, IDOR/BOLA, authorization flaws, JWT security, excessive data exposure, rate limiting, and insecure configuration | [Read the project](projects/vulnerable-employee-management-api/README.md) |
+
+Built as an intentionally vulnerable application in a local-only lab and tested using Burp Suite, Postman, and jwt.io. Findings include discovery, evidence, impact, remediation, and retesting.
+
+
 ## Fundamentals
 
 Foundational notes written while building up the basics — how the web works underneath, and
