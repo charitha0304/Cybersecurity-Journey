@@ -1,0 +1,15 @@
+secret
+password
+changeme
+your-256-bit-secret
+jwtsecret
+supersecret
+admin
+mysecretkey
+dev-secret-key
+test-signing-key
+insecure-demo-signing-key
+insecure-demo-signing-key-do-not-use-in-production
+production-key
+signing-key-change-me
+do-not-use-in-production
