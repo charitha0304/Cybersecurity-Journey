@@ -154,7 +154,11 @@ After the fix, re-send the exploit request:
 ```
 Expected result: `401 Unauthorized`. The quote is now treated as literal text
 inside the username value, the lookup finds no matching user, and the bypass
-fails. (Add the retest screenshot here once the fix is applied.)
+fails. 
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 1 retest](screenshots/finding-01-retest.png)
 
 ## References
 

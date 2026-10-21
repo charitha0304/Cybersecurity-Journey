@@ -178,8 +178,11 @@ GET /api/employees/search?name=zzz' UNION SELECT Id, Username, Password, Role, 0
 ```
 Expected result: the whole value is treated as a literal search string, so the
 query looks for an employee whose name contains that text, finds none, and
-returns `[]`. No `Users` data is returned. (Add the retest screenshot here once
-the fix is applied.)
+returns `[]`. No `Users` data is returned. 
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 2 retest](screenshots/finding-02-retest.png)
 
 ## References
 

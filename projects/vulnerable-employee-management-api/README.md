@@ -88,11 +88,19 @@ claims that a forged token can set freely.
 ```
 .
 ├── README.md                     ← this file
+├── RETEST.md                     ← Phase 3 retest checklist (attack → now blocked)
 ├── VulnerableEmployeeApi/        ← the intentionally vulnerable .NET 8 API
+├── SecureEmployeeApi/            ← the hardened build: all 8 findings fixed
 └── findings/
     ├── finding-01-....md ... finding-08-....md
     └── screenshots/                   ← evidence screenshots (sensitive values redacted)
 ```
+
+The two builds sit side by side so the difference between them is the remediation.
+`SecureEmployeeApi` fixes every finding (parameterised queries + hashed passwords,
+object- and function-level authorization, DTOs, rate limiting, a strong JWT key
+with issuer/audience validation, and hardened configuration); `RETEST.md` is the
+checklist for confirming each original attack is now blocked.
 
 Screenshots in the reports have sensitive values redacted — bearer tokens, passwords,
 and National Insurance numbers are blacked out while enough is left visible to prove
@@ -102,4 +110,7 @@ each finding.
 
 - **Phase 1 — build the vulnerable app:** done.
 - **Phase 2 — attack and document (through root cause):** done — all 8 findings.
-- **Phase 3 — apply fixes and capture retests:** next.
+- **Phase 3 — apply fixes and capture retests:** done. The hardened build is in
+  `SecureEmployeeApi/`, and each finding's report now ends with a retest screenshot
+  confirming the attack is blocked (401 / 403 / 429 / empty result / no data leak /
+  HTTPS redirect). The full discover → document → fix → retest loop is complete.

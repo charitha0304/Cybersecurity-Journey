@@ -152,7 +152,11 @@ In a production-like run (`ASPNETCORE_ENVIRONMENT=Production`):
 - HTTP requests redirect to HTTPS.
 - The signing key is read from the environment, not from `appsettings.json`.
 
-(Add the retest screenshots here once the fix is applied.)
+
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 8 retest](screenshots/finding-08-retest.png)
 
 ## References
 

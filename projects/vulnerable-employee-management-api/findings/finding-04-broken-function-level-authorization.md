@@ -148,8 +148,11 @@ After the fix, repeat as alice:
 GET    /api/admin/users   → 403 Forbidden
 DELETE /api/employees/4   → 403 Forbidden
 ```
-Both succeed only with an Admin token. (Add the retest screenshots here once the
-fix is applied.)
+Both succeed only with an Admin token. 
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 4 retest](screenshots/finding-04-retest.png)
 
 ## References
 

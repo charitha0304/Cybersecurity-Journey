@@ -159,7 +159,11 @@ After the fix, repeat the attack as alice:
 GET /api/employees/5   → 403 Forbidden   (not her record)
 GET /api/employees/1   → 200 OK          (her own record still works)
 ```
-(Add the retest screenshot here once the fix is applied.)
+
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 3 retest](screenshots/finding-03-retest.png)
 
 ## References
 

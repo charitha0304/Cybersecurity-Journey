@@ -132,7 +132,11 @@ Defence in depth:
 
 After the fix, repeat the Intruder run: the first few attempts return `401`, and
 subsequent attempts within the window return **`429 Too Many Requests`** (or the
-account is locked). (Add the retest screenshot here once the fix is applied.)
+account is locked). 
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 7 retest](screenshots/finding-07-retest.png)
 
 ## References
 

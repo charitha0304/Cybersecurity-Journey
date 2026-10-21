@@ -156,7 +156,11 @@ After moving to a strong secret loaded from the environment (and ideally RS256):
 - A token tampered without a valid signature → `401 Unauthorized`.
 - Only tokens issued by the server with the real key are accepted.
 
-(Add the retest screenshots here once the fix is applied.)
+
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 5 retest](screenshots/finding-05-retest.png)
 
 ## References
 

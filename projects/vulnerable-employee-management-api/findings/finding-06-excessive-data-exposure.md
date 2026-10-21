@@ -143,7 +143,11 @@ fields:
   `performanceNotes` for a standard user.
 - `GET /api/admin/users` → no `password` field.
 
-(Add the retest screenshots here once the fix is applied.)
+
+
+**Confirmed — retest passed, the attack is now blocked:**
+
+![Finding 6 retest](screenshots/finding-06-retest.png)
 
 ## References
 
